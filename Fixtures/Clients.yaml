@@ -1,0 +1,12 @@
+client-001: {
+  "name": "Client 1",
+  "street": "Vejnavn 3",
+  "zip": "8000",
+  "city": "Aarhus C",
+  "region": "Midtjylland",
+  "country": "Danmark",
+  "phone": "00000000",
+  "internet": "https://test.dk/",
+  "email": "test@testermail.notreal"
+}
+

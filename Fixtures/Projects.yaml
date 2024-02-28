@@ -1,0 +1,18 @@
+project-A:
+    "name": "Project A"
+    "details": "Description for Project A"
+    "clientId": ""
+    "hourBudget": "50"
+    "dollarBudget": "5000"
+    "psettings": "restricted"
+    "menuType": "default"
+    "type": "project"
+    "parent": ""
+    "start": "2023-01-01"
+    "end": "2025-02-01"
+    "created": "2023-01-01"
+    "modified": "2023-01-01"
+    "assignedUsers":
+      - id: '@test@example.com'
+        projectRole: admin
+

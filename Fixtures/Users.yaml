@@ -1,0 +1,10 @@
+test@example.com:
+  # Username
+  user: test@example.com
+  # Will be hashed on create
+  password: test
+  status: a # Active
+  role: 5
+
+
+

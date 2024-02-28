@@ -1,0 +1,22 @@
+{
+    "name": "leantime/Fixtures",
+    "description": "Loads fixtures into database",
+    "version": "0.1",
+    "screenshot": "",
+    "authors": [
+        {
+            "name": "Mikkel Ricky",
+            "email": "rimi@aarhus.dk"
+        }
+    ],
+    "homepage": "https://github.com/ITK-Leantime/leantime-fixtures",
+    "type": "plugin",
+    "keywords": [
+        "fixtures",
+        "leantime"
+    ],
+    "license": "MIT",
+    "require": {
+        "leantime/leantime": "^3.0"
+    }
+}

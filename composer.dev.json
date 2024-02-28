@@ -1,0 +1,26 @@
+{
+    "name": "leantime/itk",
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.50"
+    },
+    "scripts": {
+        "coding-standards-check/php-cs-fixer": [
+            "php-cs-fixer fix --dry-run"
+        ],
+        "coding-standards-check": [
+            "@coding-standards-check/php-cs-fixer"
+        ],
+        "coding-standards-apply/php-cs-fixer": [
+            "php-cs-fixer fix"
+        ],
+        "coding-standards-apply": [
+            "@coding-standards-apply/php-cs-fixer"
+        ],
+        "code-analysis/phpstan": [
+            "phpstan analyse"
+        ],
+        "code-analysis": [
+            "@code-analysis/phpstan"
+        ]
+    }
+}
