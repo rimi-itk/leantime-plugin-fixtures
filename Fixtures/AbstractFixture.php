@@ -5,6 +5,9 @@ namespace Leantime\Plugins\Fixtures\Fixtures;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerTrait;
 
+/**
+ * Abstract fixture.
+ */
 abstract class AbstractFixture
 {
     use LoggerAwareTrait;
@@ -12,10 +15,25 @@ abstract class AbstractFixture
 
     private static array $references = [];
 
-    abstract public function purge();
+    /**
+     * Purge data.
+     *
+     * @return void
+     */
+    abstract public function purge(): void;
 
-    abstract public function load();
+    /**
+     * Load data.
+     *
+     * @return void
+     */
+    abstract public function load(): void;
 
+    /**
+     * {@inheritdoc}
+     *
+     * @return void
+     */
     public function log($level, $message, array $context = [])
     {
         if ($this->logger) {
@@ -23,11 +41,21 @@ abstract class AbstractFixture
         }
     }
 
+    /**
+     * Set reference.
+     *
+     * @return void
+     */
     protected function setReference(mixed $id, mixed $value): void
     {
         static::$references[$id] = $value;
     }
 
+    /**
+     * Get reference.
+     *
+     * @return mixed
+     */
     protected function getReference(mixed $id): mixed
     {
         return static::$references[$id] ?? null;

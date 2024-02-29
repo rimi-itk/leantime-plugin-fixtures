@@ -1,9 +1,15 @@
-test@example.com:
+admin@example.com:
   # Username
-  user: test@example.com
+  user: admin@example.com
   # Will be hashed on create
-  password: test
+  password: password
   status: a # Active
+  role: 50
+
+test@example.com:
+  user: test@example.com
+  password: test
+  status: a
   role: 5
 
 

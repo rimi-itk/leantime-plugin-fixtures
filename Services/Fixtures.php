@@ -3,7 +3,9 @@
 namespace Leantime\Plugins\Fixtures\Services;
 
 use Leantime\Plugins\Fixtures\Fixtures\AbstractFixture;
+use Leantime\Plugins\Fixtures\Fixtures\ClientsFixture;
 use Leantime\Plugins\Fixtures\Fixtures\ProjectsFixture;
+use Leantime\Plugins\Fixtures\Fixtures\TicketsFixture;
 use Leantime\Plugins\Fixtures\Fixtures\UsersFixture;
 use Psr\Log\LoggerAwareTrait;
 
@@ -18,11 +20,19 @@ class Fixtures
      * Constructor
      */
     public function __construct(
+        private readonly TicketsFixture $ticketsFixture,
+        private readonly ClientsFixture $clientsFixture,
         private readonly UsersFixture $usersFixture,
         private readonly ProjectsFixture $projectsFixture
-    ) {}
+    ) {
+    }
 
-    public function loadFixtures()
+    /**
+     * Load all fixtures.
+     *
+     * @return void
+     */
+    public function loadFixtures(): void
     {
         $fixtures = $this->findFixtures();
 
@@ -49,8 +59,10 @@ class Fixtures
     private function findFixtures(): array
     {
         return [
+            $this->clientsFixture,
             $this->usersFixture,
             $this->projectsFixture,
+            $this->ticketsFixture,
         ];
     }
 }

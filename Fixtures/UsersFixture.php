@@ -5,13 +5,25 @@ namespace Leantime\Plugins\Fixtures\Fixtures;
 use Leantime\Domain\Users\Repositories\Users;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * Users fixture.
+ */
 class UsersFixture extends AbstractFixture
 {
+    /**
+     * Constructor.
+     */
     public function __construct(
         private readonly Users $users
-    ) {}
+    ) {
+    }
 
-    public function purge()
+    /**
+     * {@inheritdoc}
+     *
+     * @return void
+     */
+    public function purge(): void
     {
         $this->info('Purging users');
         $users = array_merge(
@@ -24,7 +36,12 @@ class UsersFixture extends AbstractFixture
         }
     }
 
-    public function load()
+    /**
+     * {@inheritdoc}
+     *
+     * @return void
+     */
+    public function load(): void
     {
         $this->info('Creating users');
         $data = Yaml::parseFile(__DIR__ . '/../Fixtures/Users.yaml');

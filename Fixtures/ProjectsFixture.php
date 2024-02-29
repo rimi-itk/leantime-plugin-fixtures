@@ -3,16 +3,27 @@
 namespace Leantime\Plugins\Fixtures\Fixtures;
 
 use Leantime\Domain\Projects\Repositories\Projects;
-use Leantime\Domain\Users\Repositories\Users;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * Projects fixture.
+ */
 class ProjectsFixture extends AbstractFixture
 {
+    /**
+     * Constructor.
+     */
     public function __construct(
         private readonly Projects $projects
-    ) {}
+    ) {
+    }
 
-    public function purge()
+    /**
+     * {@inheritdoc}
+     *
+     * @return void
+     */
+    public function purge(): void
     {
         $this->info('Purging projects');
         $projects = $this->projects->getAll(true);
@@ -21,7 +32,12 @@ class ProjectsFixture extends AbstractFixture
         }
     }
 
-    public function load()
+    /**
+     * {@inheritdoc}
+     *
+     * @return void
+     */
+    public function load(): void
     {
         $this->info('Creating projects');
         $data = Yaml::parseFile(__DIR__ . '/../Fixtures/Projects.yaml');
@@ -29,7 +45,8 @@ class ProjectsFixture extends AbstractFixture
             if (isset($values['assignedUsers'])) {
                 foreach ($values['assignedUsers'] as &$user) {
                     if (isset($user['id']) && str_starts_with($user['id'], '@')) {
-                        if (($reference = $this->getReference(substr($user['id'], 1)))
+                        if (
+                            ($reference = $this->getReference(substr($user['id'], 1)))
                             && isset($reference['id'])
                         ) {
                             $user['id'] = $reference['id'];

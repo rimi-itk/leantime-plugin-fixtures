@@ -10,7 +10,7 @@ Clone this repository into your Leantime plugin folder:
 git clone https://github.com/rimi-itk/leantime-plugin-fixtures app/Plugins/Fixtures
 ```
 
-Navigate to `/plugins/myapps` and activate the `leantime/Fixtures` plugin.
+Navigate to `/plugins/myapps` and activate the `leantime/fixtures` plugin.
 
 ## Usage
 
@@ -25,6 +25,6 @@ bin/leantime fixtures:load
 ### Coding standards
 
 ``` shell
-docker run --rm --volume ${PWD}:/app --env COMPOSER=composer.dev.json itkdev/php8.1-fpm:latest composer install
-docker run --rm --volume ${PWD}:/app --env COMPOSER=composer.dev.json itkdev/php8.1-fpm:latest composer coding-standards-check
+docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.1-fpm:latest composer install
+docker run --tty --interactive --rm --volume ${PWD}:/app itkdev/php8.1-fpm:latest composer coding-standards-check
 ```
