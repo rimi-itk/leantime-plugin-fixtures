@@ -1,22 +1,50 @@
--
+ticket-000:
   "headline": "Ticket headline"
   "type": "task"
-  "description": "Description for Opgave"
-  "date": "2023-01-01"
-  "dateToFinish": "2025-01-10"
-  "projectId": "@project-a"
-  "status": 3
-  "userId": "@test@example.com"
+  "description": "Description of To-do"
+  "date": "<date()>"
+  "dateToFinish": "<date(+1 days)>"
+  "projectId": "<ref(project-a)>"
+  "status": 3 # @TODO What is this?
+  # Creator of ticket
+  "userId": "<ref(test001@example.com)>"
   "tags": "tag1 tag2"
   "sprint": 0
   "storypoints": 0
   "priority": 3
   "hourRemaining": 8
   "planHours": 16
-  "acceptanceCriteria": "Criteria for Opgave "
+  "acceptanceCriteria": "Criteria for Opgave"
   "editFrom": ""
   "editTo": ""
-  "editorId": ""
+  # Assignee
+  "editorId": "<ref(test@example.com)>"
+  "dependingTicketId": ""
+  "milestoneid": 0
+  "sortindex": 0
+  "kanbanSortindex": 0
+
+ticket-001:
+  "headline": "Another ticket"
+  "type": "task"
+  "description": "Description of To-do"
+  "date": "<date()>"
+  "dateToFinish": "<date(+1 days)>"
+  "projectId": "<ref(project-a)>"
+  "status": 3 # @TODO What is this?
+  # Creator of ticket
+  "userId": "<ref(test@example.com)>"
+  "tags": "tag1 tag2"
+  "sprint": 0
+  "storypoints": 0
+  "priority": 3
+  "hourRemaining": 8
+  "planHours": 16
+  "acceptanceCriteria": "Criteria for Opgave"
+  "editFrom": ""
+  "editTo": ""
+  # Assignee
+  "editorId": "<ref(test001@example.com)>"
   "dependingTicketId": ""
   "milestoneid": 0
   "sortindex": 0

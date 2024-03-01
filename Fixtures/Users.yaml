@@ -4,13 +4,32 @@ admin@example.com:
   # Will be hashed on create
   password: password
   status: a # Active
-  role: 50
+  role: 50 # Owner
+  firstname: Admin
+  lastname: Jensen
+
+#  5 # readonly
+# 10 # commenter
+# 20 # editor
+# 30 # manager
+# 40 # admin
+# 50 # owner
 
 test@example.com:
   user: test@example.com
   password: test
   status: a
-  role: 5
+  role: 20
+  firstname: Test
+  lastname: Person
+
+test001@example.com:
+  user: test001@example.com
+  password: test
+  status: a
+  role: 20
+  firstname: Test One
+  lastname: Person
 
 
 

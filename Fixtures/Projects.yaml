@@ -13,6 +13,8 @@ project-a:
     "created": "2023-01-01"
     "modified": "2023-01-01"
     "assignedUsers":
-      - id: '@test@example.com'
-        projectRole: admin
+      - id: '<ref(test@example.com)>'
+        projectRole: 20 # editor
+      - id: '<ref(test001@example.com)>'
+        projectRole: 20 # editor
 

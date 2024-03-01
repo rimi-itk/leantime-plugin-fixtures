@@ -20,10 +20,11 @@ class Fixtures
      * Constructor
      */
     public function __construct(
-        private readonly TicketsFixture $ticketsFixture,
+        // @TODO Find a more elegant way to inject all fixture classes.
         private readonly ClientsFixture $clientsFixture,
         private readonly UsersFixture $usersFixture,
-        private readonly ProjectsFixture $projectsFixture
+        private readonly ProjectsFixture $projectsFixture,
+        private readonly TicketsFixture $ticketsFixture,
     ) {
     }
 
@@ -58,11 +59,15 @@ class Fixtures
      */
     private function findFixtures(): array
     {
-        return [
+        $fixtures = [
             $this->clientsFixture,
             $this->usersFixture,
             $this->projectsFixture,
             $this->ticketsFixture,
         ];
+
+        // @TODO: Sort fixtures topologically on dependencies.
+
+        return $fixtures;
     }
 }
