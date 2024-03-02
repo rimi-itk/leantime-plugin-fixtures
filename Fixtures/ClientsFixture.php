@@ -10,6 +10,8 @@ use Symfony\Component\Yaml\Yaml;
  */
 class ClientsFixture extends AbstractFixture
 {
+    protected string $type = 'clients';
+
     /**
      * Constructor.
      */
@@ -23,9 +25,8 @@ class ClientsFixture extends AbstractFixture
      *
      * @return void
      */
-    public function purge(): void
+    protected function doPurge(): void
     {
-        $this->info('Purging clients');
         $clients = $this->clients->getAll();
         foreach ($clients as $client) {
             $this->clients->deleteClient($client['id']);
@@ -35,17 +36,22 @@ class ClientsFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      *
-     * @return void
+     * @return array
      */
-    public function load(): void
+    public function getFixturesData(): array
     {
-        $this->info('Creating clients');
-        $data = Yaml::parseFile(__DIR__ . '/../Fixtures/Clients.yaml');
-        foreach ($data as $id => $values) {
-            $clientId = $this->clients->addClient($values);
-            if ($clientId) {
-                $this->setReference($id, $this->clients->getClient($clientId));
-            }
-        }
+        return Yaml::parseFile(__DIR__ . '/../Fixtures/Clients.yaml');
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return mixed
+     */
+    protected function createFixture(array $values): mixed
+    {
+        $clientId = $this->clients->addClient($values);
+
+        return $this->clients->getClient($clientId);
     }
 }

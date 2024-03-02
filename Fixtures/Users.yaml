@@ -1,6 +1,6 @@
-admin@example.com:
+admin:
   # Username
-  user: admin@example.com
+  user: admin\@example.com
   # Will be hashed on create
   password: password
   status: a # Active
@@ -15,21 +15,29 @@ admin@example.com:
 # 40 # admin
 # 50 # owner
 
-test@example.com:
-  user: test@example.com
+test:
+  user: test\@example.com
   password: test
   status: a
   role: 20
   firstname: Test
   lastname: Person
 
-test001@example.com:
-  user: test001@example.com
+test001:
+  user: test001\@example.com
   password: test
   status: a
   role: 20
   firstname: Test One
   lastname: Person
+
+user_{0..99}:
+  user: user<current()>\@example.com
+  password: password
+  status: a
+  role: 20
+  firstname: Test
+  lastname: User <current()>
 
 
 

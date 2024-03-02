@@ -4,10 +4,10 @@ ticket-000:
   "description": "Description of To-do"
   "date": "<date()>"
   "dateToFinish": "<date(+1 days)>"
-  "projectId": "<ref(project-a)>"
+  "projectId": "@project_a->id"
   "status": 3 # @TODO What is this?
   # Creator of ticket
-  "userId": "<ref(test001@example.com)>"
+  "userId": "test001->id"
   "tags": "tag1 tag2"
   "sprint": 0
   "storypoints": 0
@@ -18,7 +18,7 @@ ticket-000:
   "editFrom": ""
   "editTo": ""
   # Assignee
-  "editorId": "<ref(test@example.com)>"
+  "editorId": "test->id"
   "dependingTicketId": ""
   "milestoneid": 0
   "sortindex": 0
@@ -30,10 +30,10 @@ ticket-001:
   "description": "Description of To-do"
   "date": "<date()>"
   "dateToFinish": "<date(+1 days)>"
-  "projectId": "<ref(project-a)>"
+  "projectId": "@project_a->id"
   "status": 3 # @TODO What is this?
   # Creator of ticket
-  "userId": "<ref(test@example.com)>"
+  "userId": "@test->id"
   "tags": "tag1 tag2"
   "sprint": 0
   "storypoints": 0
@@ -44,7 +44,33 @@ ticket-001:
   "editFrom": ""
   "editTo": ""
   # Assignee
-  "editorId": "<ref(test001@example.com)>"
+  "editorId": "test001->id"
+  "dependingTicketId": ""
+  "milestoneid": 0
+  "sortindex": 0
+  "kanbanSortindex": 0
+
+ticket_{0..99}:
+  "headline": "Ticket <current()>"
+  "type": "task"
+  "description": "Description of Ticket <current()>"
+  "date": "<date()>"
+  "dateToFinish": "<date(+1 days)>"
+  "projectId": "@project_a->id"
+  "status": 3 # @TODO What is this?
+  # Creator of ticket
+  "userId": "@test->id"
+  "tags": "tag1 tag2"
+  "sprint": 0
+  "storypoints": 0
+  "priority": 3
+  "hourRemaining": 8
+  "planHours": 16
+  "acceptanceCriteria": "Criteria for Opgave"
+  "editFrom": ""
+  "editTo": ""
+  # Assignee
+  "editorId": "test001->id"
   "dependingTicketId": ""
   "milestoneid": 0
   "sortindex": 0

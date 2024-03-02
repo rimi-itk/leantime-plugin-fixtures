@@ -10,6 +10,8 @@ use Symfony\Component\Yaml\Yaml;
  */
 class ProjectsFixture extends AbstractFixture
 {
+    protected string $type = 'projects';
+
     /**
      * Constructor.
      */
@@ -23,9 +25,8 @@ class ProjectsFixture extends AbstractFixture
      *
      * @return void
      */
-    public function purge(): void
+    public function doPurge(): void
     {
-        $this->info('Purging projects');
         $projects = $this->projects->getAll(true);
         foreach ($projects as $project) {
             $this->projects->deleteProject($project['id']);
@@ -35,18 +36,22 @@ class ProjectsFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      *
-     * @return void
+     * @return array
      */
-    public function load(): void
+    public function getFixturesData(): array
     {
-        $this->info('Creating projects');
-        $data = Yaml::parseFile(__DIR__ . '/../Fixtures/Projects.yaml');
-        foreach ($data as $id => $values) {
-            $values = $this->expandValues($values);
-            $projectId = $this->projects->addProject($values);
-            if ($projectId) {
-                $this->setReference($id, $this->projects->getProject($projectId));
-            }
-        }
+        return Yaml::parseFile(__DIR__ . '/../Fixtures/Projects.yaml');
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return mixed
+     */
+    protected function createFixture(array $values): mixed
+    {
+        $projectId = $this->projects->addProject($values);
+
+        return $this->projects->getProject($projectId);
     }
 }

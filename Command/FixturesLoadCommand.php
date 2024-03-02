@@ -8,7 +8,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Load fixtures command.
@@ -35,13 +35,9 @@ class FixturesLoadCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        if ($input->isInteractive()) {
-            $helper = $this->getHelper('question');
-            $question = new ConfirmationQuestion('Really load fixtures? This will destroy all data! (y|N) ', false);
-
-            if (!$helper->ask($input, $output, $question)) {
-                return Command::SUCCESS;
-            }
+        $io = new SymfonyStyle($input, $output);
+        if (!$io->confirm('Really load fixtures? This will destroy all data!', !$input->isInteractive())) {
+            return Command::SUCCESS;
         }
 
         $output->setVerbosity($output->getVerbosity() | OutputInterface::VERBOSITY_VERY_VERBOSE);

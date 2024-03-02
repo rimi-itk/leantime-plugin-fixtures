@@ -10,6 +10,8 @@ use Symfony\Component\Yaml\Yaml;
  */
 class UsersFixture extends AbstractFixture
 {
+    protected string $type = 'users';
+
     /**
      * Constructor.
      */
@@ -23,9 +25,8 @@ class UsersFixture extends AbstractFixture
      *
      * @return void
      */
-    public function purge(): void
+    public function doPurge(): void
     {
-        $this->info('Purging users');
         $users = array_merge(
             // This does not include API users.
             $this->users->getAll(),
@@ -39,17 +40,22 @@ class UsersFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      *
-     * @return void
+     * @return array
      */
-    public function load(): void
+    public function getFixturesData(): array
     {
-        $this->info('Creating users');
-        $data = Yaml::parseFile(__DIR__ . '/../Fixtures/Users.yaml');
-        foreach ($data as $id => $values) {
-            $userId = $this->users->addUser($values);
-            if ($userId) {
-                $this->setReference($id, $this->users->getUser($userId));
-            }
-        }
+        return Yaml::parseFile(__DIR__ . '/../Fixtures/Users.yaml');
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return mixed
+     */
+    protected function createFixture(array $values): mixed
+    {
+        $userId = $this->users->addUser($values);
+
+        return $this->users->getUser($userId);
     }
 }

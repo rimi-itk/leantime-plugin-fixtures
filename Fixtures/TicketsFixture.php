@@ -10,6 +10,8 @@ use Symfony\Component\Yaml\Yaml;
  */
 class TicketsFixture extends AbstractFixture
 {
+    protected string $type = 'tickets';
+
     /**
      * Constructor.
      */
@@ -23,9 +25,8 @@ class TicketsFixture extends AbstractFixture
      *
      * @return void
      */
-    public function purge(): void
+    public function doPurge(): void
     {
-        $this->info('Purging tickets');
         $tickets = $this->tickets->getAllBySearchCriteria([]);
         foreach ($tickets as $ticket) {
             $this->tickets->deleteTicket($ticket['id']);
@@ -35,18 +36,22 @@ class TicketsFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      *
-     * @return void
+     * @return array
      */
-    public function load(): void
+    public function getFixturesData(): array
     {
-        $this->info('Creating tickets');
-        $data = Yaml::parseFile(__DIR__ . '/../Fixtures/Tickets.yaml');
-        foreach ($data as $id => $values) {
-            $values = $this->expandValues($values);
-            $ticketId = $this->tickets->addTicket($values);
-            if ($ticketId) {
-                $this->setReference($id, $this->tickets->getTicket($ticketId));
-            }
-        }
+        return Yaml::parseFile(__DIR__ . '/../Fixtures/Tickets.yaml');
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return mixed
+     */
+    protected function createFixture(array $values): mixed
+    {
+        $ticketId = $this->tickets->addTicket($values);
+
+        return $this->tickets->getTicket($ticketId);
     }
 }
