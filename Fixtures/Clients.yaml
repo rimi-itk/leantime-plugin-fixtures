@@ -8,7 +8,3 @@ client_{0..9}:
   phone: '00000000'
   internet: https://client<current()>.example.dk/
   email: client<current()>\@example.com
-
-
-
-

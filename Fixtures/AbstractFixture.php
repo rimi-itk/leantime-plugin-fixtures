@@ -5,6 +5,7 @@ namespace Leantime\Plugins\Fixtures\Fixtures;
 use Leantime\Plugins\Fixtures\Services\FixtureDataProcessor;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerTrait;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Abstract fixture.
@@ -58,11 +59,20 @@ abstract class AbstractFixture
     }
 
     /**
-     * Get fitures data.
+     * Get fixtures data.
      *
      * @return array
      */
-    abstract protected function getFixturesData(): array;
+    protected function getFixturesData(): array
+    {
+        $name = preg_replace('@.+\\\\(.+)Fixture$@', '\1', static::class);
+        $path = __DIR__ . '/../Fixtures/' . $name . '.yaml';
+        if (!is_readable($path)) {
+            throw new \RuntimeException(sprintf('Cannot read fixtures path %s', $path));
+        }
+
+        return Yaml::parseFile($path);
+    }
 
     /**
      * Create fixture.

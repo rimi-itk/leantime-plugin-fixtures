@@ -15,22 +15,6 @@ admin:
 # 40 # admin
 # 50 # owner
 
-test:
-  user: test\@example.com
-  password: test
-  status: a
-  role: 20
-  firstname: Test
-  lastname: Person
-
-test001:
-  user: test001\@example.com
-  password: test
-  status: a
-  role: 20
-  firstname: Test One
-  lastname: Person
-
 user_{0..99}:
   user: user<current()>\@example.com
   password: password
@@ -38,6 +22,3 @@ user_{0..99}:
   role: 20
   firstname: Test
   lastname: User <current()>
-
-
-

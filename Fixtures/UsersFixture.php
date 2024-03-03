@@ -40,16 +40,6 @@ class UsersFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      *
-     * @return array
-     */
-    public function getFixturesData(): array
-    {
-        return Yaml::parseFile(__DIR__ . '/../Fixtures/Users.yaml');
-    }
-
-    /**
-     * {@inheritdoc}
-     *
      * @return mixed
      */
     protected function createFixture(array $values): mixed

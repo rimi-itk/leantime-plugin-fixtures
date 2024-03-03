@@ -106,64 +106,94 @@ final class FixtureDataProcessorTest extends TestCase
 
         yield [
             [
-                'item_{0..9}' => [
-                    'name' => 'Item <current()>',
-                    'createdAt' => '<datetime()>',
-                    'client' => '<mod(<current()>, 4)>',
+                'item_{0..1}' => [
+                    'id' => '<current()>',
+                    'ids' => ['<current()>'],
                 ],
             ],
             [
                 'item_0' => [
+                    'id' => 0,
+                    'ids' => [0],
+                ],
+                'item_1' => [
+                    'id' => 1,
+                    'ids' => [1],
+                ],
+            ],
+        ];
+
+            yield [
+            [
+                'item_{0..9}' => [
+                    'id' => '<current()>',
+                    'name' => 'Item <current()>',
+                    'createdAt' => '<datetime()>',
+                    'client' => '<mod(current(), 4)>',
+                ],
+            ],
+            [
+                'item_0' => [
+                    'id' => 0,
                     'name' => 'Item 0',
                     'createdAt' => static::$now->format('Y-m-d H:i:s'),
                     'client' => '0',
                 ],
                 'item_1' => [
+                    'id' => 1,
                     'name' => 'Item 1',
                     'createdAt' => static::$now->format('Y-m-d H:i:s'),
                     'client' => '1',
                 ],
                 'item_2' => [
+                    'id' => 2,
                     'name' => 'Item 2',
                     'createdAt' => static::$now->format('Y-m-d H:i:s'),
                     'client' => '2',
                 ],
                 'item_3' => [
+                    'id' => 3,
                     'name' => 'Item 3',
                     'createdAt' => static::$now->format('Y-m-d H:i:s'),
                     'client' => '3',
                 ],
                 'item_4' => [
+                    'id' => 4,
                     'name' => 'Item 4',
                     'createdAt' => static::$now->format('Y-m-d H:i:s'),
                     'client' => '0',
                 ],
                 'item_5' => [
+                    'id' => 5,
                     'name' => 'Item 5',
                     'createdAt' => static::$now->format('Y-m-d H:i:s'),
                     'client' => '1',
                 ],
                 'item_6' => [
+                    'id' => 6,
                     'name' => 'Item 6',
                     'createdAt' => static::$now->format('Y-m-d H:i:s'),
                     'client' => '2',
                 ],
                 'item_7' => [
+                    'id' => 7,
                     'name' => 'Item 7',
                     'createdAt' => static::$now->format('Y-m-d H:i:s'),
                     'client' => '3',
                 ],
                 'item_8' => [
+                    'id' => 8,
                     'name' => 'Item 8',
                     'createdAt' => static::$now->format('Y-m-d H:i:s'),
                     'client' => '0',
                 ],
                 'item_9' => [
+                    'id' => 9,
                     'name' => 'Item 9',
                     'createdAt' => static::$now->format('Y-m-d H:i:s'),
                     'client' => '1',
                 ],
             ],
-        ];
+            ];
     }
 }

@@ -1,77 +1,25 @@
-ticket-000:
-  "headline": "Ticket headline"
-  "type": "task"
-  "description": "Description of To-do"
-  "date": "<date()>"
-  "dateToFinish": "<date(+1 days)>"
-  "projectId": "@project_a->id"
-  "status": 3 # @TODO What is this?
-  # Creator of ticket
-  "userId": "test001->id"
-  "tags": "tag1 tag2"
-  "sprint": 0
-  "storypoints": 0
-  "priority": 3
-  "hourRemaining": 8
-  "planHours": 16
-  "acceptanceCriteria": "Criteria for Opgave"
-  "editFrom": ""
-  "editTo": ""
-  # Assignee
-  "editorId": "test->id"
-  "dependingTicketId": ""
-  "milestoneid": 0
-  "sortindex": 0
-  "kanbanSortindex": 0
-
-ticket-001:
-  "headline": "Another ticket"
-  "type": "task"
-  "description": "Description of To-do"
-  "date": "<date()>"
-  "dateToFinish": "<date(+1 days)>"
-  "projectId": "@project_a->id"
-  "status": 3 # @TODO What is this?
-  # Creator of ticket
-  "userId": "@test->id"
-  "tags": "tag1 tag2"
-  "sprint": 0
-  "storypoints": 0
-  "priority": 3
-  "hourRemaining": 8
-  "planHours": 16
-  "acceptanceCriteria": "Criteria for Opgave"
-  "editFrom": ""
-  "editTo": ""
-  # Assignee
-  "editorId": "test001->id"
-  "dependingTicketId": ""
-  "milestoneid": 0
-  "sortindex": 0
-  "kanbanSortindex": 0
-
 ticket_{0..99}:
-  "headline": "Ticket <current()>"
-  "type": "task"
-  "description": "Description of Ticket <current()>"
-  "date": "<date()>"
-  "dateToFinish": "<date(+1 days)>"
-  "projectId": "@project_a->id"
-  "status": 3 # @TODO What is this?
+  headline: 'Ticket <current()>'
+  type: 'task'
+  description: 'Description of Ticket <current()>'
+  date: <date()>
+  dateToFinish: <date(+1 days)>
+  projectId: '@project_<mod(current(), 17)>'
+  status: 3 # @TODO What is this?
   # Creator of ticket
-  "userId": "@test->id"
-  "tags": "tag1 tag2"
-  "sprint": 0
-  "storypoints": 0
-  "priority": 3
-  "hourRemaining": 8
-  "planHours": 16
-  "acceptanceCriteria": "Criteria for Opgave"
-  "editFrom": ""
-  "editTo": ""
+  userId: '@user_1->id'
+  tags: tag1 tag2
+  sprint: 0
+  storypoints: 0
+  priority: 3
+  hourRemaining: 8
+  planHours: 16
+  acceptanceCriteria: Criteria for Opgave
+  editFrom:
+  editTo:
   # Assignee
-  "editorId": "test001->id"
-  "dependingTicketId": ""
-  "milestoneid": 0
-  "sortindex": 0
-  "kanbanSortindex": 0
+  editorId: '@user_1->id'
+  dependingTicketId:
+  milestoneid: 0
+  sortindex: <current()>
+  kanbanSortindex: 0

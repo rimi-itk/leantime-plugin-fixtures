@@ -36,16 +36,6 @@ class TicketsFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      *
-     * @return array
-     */
-    public function getFixturesData(): array
-    {
-        return Yaml::parseFile(__DIR__ . '/../Fixtures/Tickets.yaml');
-    }
-
-    /**
-     * {@inheritdoc}
-     *
      * @return mixed
      */
     protected function createFixture(array $values): mixed

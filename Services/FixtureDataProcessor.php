@@ -30,11 +30,7 @@ final class FixtureDataProcessor
             if (preg_match('/^(?P<prefix>.+_)\{(?P<start>[^.]+)\.{2}(?P<end>[^)]+)\}$/', $key, $matches)) {
                 foreach (range($matches['start'], $matches['end']) as $current) {
                     $clone = $value;
-                    array_walk($clone, static function (mixed &$value) use ($current) {
-                        if (is_string($value)) {
-                            $value = str_replace('<current()>', (string)$current, $value);
-                        }
-                    });
+                    array_walk($clone, fn (mixed &$value) => $this->expandCurrent($value, $current));
                     $ranges[$matches['prefix'] . $current] = $clone;
                 }
             } else {
@@ -47,6 +43,28 @@ final class FixtureDataProcessor
         array_walk($values, $this->expandValue(...));
 
         return $values;
+    }
+
+    /**
+     * Expand current() expression.
+     *
+     * @return void
+     */
+    private function expandCurrent(mixed &$value, int|string $current)
+    {
+        if (is_array($value)) {
+            foreach ($value as $key => &$val) {
+                $this->expandCurrent($val, $current);
+            }
+        } elseif (is_string($value)) {
+            // Replace current() inside expressions
+            $value = preg_replace('/(<[^>]+)current\(\)([^>]+>)/', '${1}' . $current . '${2}', $value);
+            // Evaluate current as an expression.
+            $value = str_replace('<current()>', (string)$current, $value);
+            if (is_numeric($value)) {
+                $value = (int)$value;
+            }
+        }
     }
 
     /**
@@ -140,17 +158,18 @@ final class FixtureDataProcessor
             return (int)$matches['a'] % (int)$matches['b'];
         }
 
-        if (preg_match('/^date(?P<time>time)?\((?P<spec>[^)]*)\)$/', $expression, $matches)) {
-            // <datetime(spec)> => yyyy-mm-dd hh:mm:ss
+        if (preg_match('/^(?P<name>date(?P<time>time)?|time)\((?P<spec>[^)]*)\)$/', $expression, $matches)) {
             // <date(spec)> => yyyy-mm-dd
-            $datetime = $matches['spec'] ? new \DateTimeImmutable($matches['spec']) : $this->getNow();
-            return $datetime->format($matches['time'] ? 'Y-m-d H:i:s' : 'Y-m-d');
-        }
-
-        if (preg_match('/^time\((?P<spec>[^)]*)\)$/', $expression, $matches)) {
+            // <datetime(spec)> => yyyy-mm-dd hh:mm:ss
             // <time(spec)> => hh:mm:ss
             $datetime = $matches['spec'] ? new \DateTimeImmutable($matches['spec']) : $this->getNow();
-            return $datetime->format('H:i:s');
+            $format = match ($matches['name']) {
+                'datetime' => 'Y-m-d H:i:s',
+                'date' => 'Y-m-d',
+                'time' => 'H:i:s',
+            };
+
+            return $datetime->format($format);
         }
 
         throw new \RuntimeException(sprintf('Invalid expression: %s', $expression));
