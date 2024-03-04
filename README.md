@@ -10,7 +10,7 @@ Clone this repository into your Leantime plugin folder:
 git clone https://github.com/rimi-itk/leantime-plugin-fixtures app/Plugins/Fixtures
 ```
 
-Install and enable the plugin:
+Install and enable the plugin (requires changes from <https://github.com/Leantime/leantime/pull/2364>):
 
 ``` shell
 bin/leantime plugin:install leantime/fixtures
